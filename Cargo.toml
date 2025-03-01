@@ -7,3 +7,11 @@ edition = "2021"
 clap = "4.5.31"
 tokio = "1.43.0"
 wasm-pack = "0.13.1"
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+[[bin]]
+name = "objr"
+path = "sdk/objctive-r/compiler.rs"
