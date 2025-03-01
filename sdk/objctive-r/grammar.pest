@@ -1,20 +1,34 @@
-Program = _{ SOI ~ Stmt* ~ EOF }
+WHITESPACE = _{ " " | "\t" | NEWLINE }
+NEWLINE = _{ "\n" | "\r\n" }
+COMMENT = _{ "//" ~ (!NEWLINE ~ ANY)* ~ NEWLINE }
 
-Stmt = { UseStmt | InterfaceDef | MethodDef | Expr }
+Program = { SOI ~ Stmt* ~ EOI }
 
-UseStmt = _{ "#use" ~ STRING ~ ";" }
+Stmt = _{ UseStmt | InterfaceDef | MethodDef | (Expr ~ ";") }
 
-InterfaceDef = _{ "#interface" ~ IDENT ~ ":" ~ IDENT ~ ">" ~ "{" ~ Stmt* ~ "}" }
+UseStmt = { "#use" ~ STRING ~ ";" }
 
-MethodDef = _{ "fn" ~ IDENT ~ "(" ~ ParamList? ~ ")" ~ "{" ~ Stmt* ~ "}" }
+InterfaceDef = { 
+    "#interface" ~ IDENT ~ ":" ~ IDENT ~ ">" ~ 
+    "{" ~ 
+    MethodDef* ~
+    "}" 
+}
 
-ParamList = _{ IDENT ~ ("," ~ IDENT)* }
+MethodDef = { 
+    "fn" ~ IDENT ~ "(" ~ ParamList? ~ ")" ~
+    "{" ~ 
+    Stmt* ~
+    "}" 
+}
+
+ParamList = { IDENT ~ ("," ~ IDENT)* }
 
 Expr = { AssignExpr | UnaryExpr | BinaryExpr | Term }
 
-AssignExpr = _{ "let" ~ IDENT ~ "=" ~ Expr }
+AssignExpr = { "let" ~ IDENT ~ "=" ~ Expr }
 
-Term = _{ Int | STRING | IDENT | "(" ~ Expr ~ ")" }
+Term = @{ STRING | Int | IDENT | "(" ~ Expr ~ ")" }
 
 UnaryExpr = { Operator ~ Term }
 
@@ -22,12 +36,8 @@ BinaryExpr = { Term ~ (Operator ~ Term)+ }
 
 Operator = { "+" | "-" | ">" }
 
-Int = @{ Operator? ~ ASCII_DIGIT+ }
+Int = @{ ASCII_DIGIT+ }
 
 STRING = @{ "\"" ~ (!"\"" ~ ANY)* ~ "\"" }
 
-IDENT = @{ ASCII_ALPHA+ }
-
-WHITESPACE = _{ " " | "\t" }
-
-EOF = _{ EOI | ";" }
+IDENT = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* }

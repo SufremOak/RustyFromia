@@ -1,0 +1,8 @@
+#use "Foundation";
+
+#interface HelloWorld : NSObject > {
+    fn sayHello() {
+        let message = "Hello, Objective-R!";
+        message;
+    }
+}

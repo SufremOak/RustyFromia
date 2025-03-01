@@ -1,9 +1,11 @@
 [package]
-name = "RustyFromia"
-version = "0.1.0"
+name = "rusty_fromia"  # Changed to snake_case
+version = "0.1.0"  # This version will be available via env!("CARGO_PKG_VERSION")
 edition = "2021"
 
 [dependencies]
+pest = "2.1"
+pest_derive = "2.1"
 clap = "4.5.31"
 tokio = "1.43.0"
 wasm-pack = "0.13.1"
@@ -14,4 +16,4 @@ path = "src/main.rs"
 
 [[bin]]
 name = "objr"
-path = "sdk/objctive-r/compiler.rs"
+path = "src/bin/objr.rs"  # Updated path
