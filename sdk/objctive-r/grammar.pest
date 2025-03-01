@@ -1,0 +1,43 @@
+WHITESPACE = _{ " " | "\t" | NEWLINE }
+NEWLINE = _{ "\n" | "\r\n" }
+COMMENT = _{ "//" ~ (!NEWLINE ~ ANY)* ~ NEWLINE }
+
+Program = { SOI ~ Stmt* ~ EOI }
+
+Stmt = _{ UseStmt | InterfaceDef | MethodDef | (Expr ~ ";") }
+
+UseStmt = { "#use" ~ STRING ~ ";" }
+
+InterfaceDef = { 
+    "#interface" ~ IDENT ~ ":" ~ IDENT ~ ">" ~ 
+    "{" ~ 
+    MethodDef* ~
+    "}" 
+}
+
+MethodDef = { 
+    "fn" ~ IDENT ~ "(" ~ ParamList? ~ ")" ~
+    "{" ~ 
+    Stmt* ~
+    "}" 
+}
+
+ParamList = { IDENT ~ ("," ~ IDENT)* }
+
+Expr = { AssignExpr | UnaryExpr | BinaryExpr | Term }
+
+AssignExpr = { "let" ~ IDENT ~ "=" ~ Expr }
+
+Term = @{ STRING | Int | IDENT | "(" ~ Expr ~ ")" }
+
+UnaryExpr = { Operator ~ Term }
+
+BinaryExpr = { Term ~ (Operator ~ Term)+ }
+
+Operator = { "+" | "-" | ">" }
+
+Int = @{ ASCII_DIGIT+ }
+
+STRING = @{ "\"" ~ (!"\"" ~ ANY)* ~ "\"" }
+
+IDENT = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* }
