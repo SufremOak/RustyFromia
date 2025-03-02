@@ -1,0 +1,44 @@
+{
+  "name": "objective-r",
+  "displayName": "Objective-R",
+  "description": "A Visual Studio Code extension for Objective-R, a superset of Rust.",
+  "version": "0.1.0",
+  "publisher": "your-name",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "activationEvents": [
+    "onLanguage:objective-r"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "objective-r",
+        "aliases": [
+          "Objective-R",
+          "objective-r"
+        ],
+        "extensions": [
+          ".rr"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "objective-r",
+        "scopeName": "source.objective-r",
+        "path": "./syntaxes/objective-r.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "watch": "node ./src/extension.js",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "vscode": "^1.60.0"
+  },
+  "dependencies": {}
+}

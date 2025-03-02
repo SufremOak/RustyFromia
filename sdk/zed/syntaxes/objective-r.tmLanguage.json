@@ -1,0 +1,70 @@
+{
+  "scopeName": "source.objective-r",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#strings"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.objective-r",
+          "begin": "//",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.objective-r"
+            }
+          },
+          "end": "$",
+          "name": "comment.line.double-slash.objective-r"
+        },
+        {
+          "name": "comment.block.objective-r",
+          "begin": "/\\*",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.objective-r"
+            }
+          },
+          "end": "\\*/",
+          "name": "comment.block.objective-r"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.objective-r",
+          "match": "\\b(fn|let|use|interface)\\b"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.objective-r",
+          "begin": "\"",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.objective-r"
+            }
+          },
+          "end": "\"",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.objective-r"
+            }
+          },
+          "name": "string.quoted.double.objective-r"
+        }
+      ]
+    }
+  }
+}

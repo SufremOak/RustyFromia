@@ -1,0 +1,50 @@
+{
+    "scopeName": "source.objective-r",
+    "patterns": [
+        {
+            "name": "comment.line.double-slash.objective-r",
+            "begin": "//",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.comment.objective-r"
+                }
+            },
+            "end": "$",
+            "patterns": []
+        },
+        {
+            "name": "string.quoted.double.objective-r",
+            "begin": "\"",
+            "end": "\"",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.begin.objective-r"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.end.objective-r"
+                }
+            },
+            "patterns": []
+        },
+        {
+            "name": "keyword.control.objective-r",
+            "match": "\\b(fn|let|if|else|return|for|while|match|struct|impl|trait|use|mod|pub|private|self|super|as|in|break|continue|true|false|none)\\b"
+        },
+        {
+            "name": "variable.other.objective-r",
+            "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+        },
+        {
+            "name": "constant.numeric.objective-r",
+            "match": "\\b\\d+\\b"
+        },
+        {
+            "name": "punctuation.separator.objective-r",
+            "match": "[;,.]"
+        }
+    ],
+    "repository": {},
+    "scopeName": "source.objective-r"
+}
